@@ -1,7 +1,6 @@
 from Scripts.imports import *
 from Scripts.preview_window import prevWindow
 from Scripts.game_window import gameWindow
-from Scripts.events import check_event
 
 # GAME VARIABLES
 START_GAME = False
@@ -13,11 +12,17 @@ def mainLoop():
     if not START_GAME:
         prevWindow()
         for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 START_GAME = True
     else:
         gameWindow()
-    check_event()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
     pygame.display.update()
 
 
