@@ -1,6 +1,6 @@
 from Scripts.imports import *
 from Scripts.preview_window import prevWindow
-from Scripts.game_window import gameWindow
+from Scripts.game_window import gameWindow, eventHandler
 
 # GAME VARIABLES
 START_GAME = False
@@ -23,6 +23,8 @@ def mainLoop():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == KEYDOWN:
+                eventHandler(event)
     pygame.display.update()
 
 

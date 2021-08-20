@@ -30,6 +30,18 @@ def chooseRandomBox():
         FULL_BOXES.append([box__, 2])
 
 
+# Event Handler
+def eventHandler(event):
+    if event.key == K_UP:
+        print("UP")
+    elif event.key == K_DOWN:
+        print("DOWN")
+    elif event.key == K_RIGHT:
+        print("RIGHT")
+    elif event.key == K_LEFT:
+        print("LEFT")
+
+
 # PREVIEW WINDOW
 def gameWindow():
     SCREEN.blit(GAME_WINDOW, (0, 0))
