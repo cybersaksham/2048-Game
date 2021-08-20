@@ -9,7 +9,7 @@ BOXES = [[(16, 20), (163, 20), (313, 20), (458, 20)],
          [(16, 463), (163, 463), (313, 463), (458, 463)]]
 BOX_WIDTH = 125
 EMPTY_BOXES = [pt for item in BOXES for pt in item]
-FULL_BOXES = []
+FULL_BOXES = {}
 CHOSEN = False
 
 
@@ -27,7 +27,8 @@ def chooseRandomBox():
         import random
         CHOSEN = True
         box__ = random.choice(EMPTY_BOXES)
-        FULL_BOXES.append([box__, 2])
+        FULL_BOXES[box__] = 2
+        EMPTY_BOXES.remove(box__)
 
 
 # Event Handler
@@ -47,4 +48,4 @@ def gameWindow():
     SCREEN.blit(GAME_WINDOW, (0, 0))
     chooseRandomBox()
     for box in FULL_BOXES:
-        drawBox(box[0], box[1])
+        drawBox(box, FULL_BOXES[box])
