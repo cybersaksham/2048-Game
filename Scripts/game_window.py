@@ -33,6 +33,7 @@ def chooseRandomBox():
 
 # Event Handler
 def eventHandler(event):
+    global CHOSEN
     if event.key == K_UP:
         print("UP")
     elif event.key == K_DOWN:
@@ -40,7 +41,15 @@ def eventHandler(event):
     elif event.key == K_RIGHT:
         print("RIGHT")
     elif event.key == K_LEFT:
-        print("LEFT")
+        for item in BOXES:
+            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))
+            for i, j in enumerate(fill_pt):
+                FULL_BOXES[item[i]] = FULL_BOXES[j]
+                if item[i] != j:
+                    FULL_BOXES.pop(j)
+                    EMPTY_BOXES.append(j)
+                    EMPTY_BOXES.remove(item[i])
+        CHOSEN = False
 
 
 # PREVIEW WINDOW
