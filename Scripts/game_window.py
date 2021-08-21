@@ -11,6 +11,7 @@ BOX_WIDTH = 125
 EMPTY_BOXES = [pt for item in BOXES for pt in item]
 FULL_BOXES = {}
 CHOSEN = False
+GAME_WON = False
 
 
 # Showing Box
@@ -97,7 +98,7 @@ def SUMLogic(item, i, j):
 
 # Event Handler
 def eventHandler(event):
-    global CHOSEN
+    global CHOSEN, GAME_WON
     if event.key == K_UP:
         rev_list = revList()
         for item in rev_list:
@@ -128,6 +129,10 @@ def eventHandler(event):
                 SUMLogic(item, i, i + 1)
             LEFTLogic(item)
         CHOSEN = False
+    for item in FULL_BOXES:
+        if FULL_BOXES[item] == 2048:
+            GAME_WON = True
+            CHOSEN = True
 
 
 # PREVIEW WINDOW
