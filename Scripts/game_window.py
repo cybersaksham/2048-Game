@@ -83,12 +83,12 @@ def eventHandler(event):
         rev_list = revList()
         for item in rev_list:
             DOWNLogic(item)
-            for i in range(3):
-                if item[i] not in EMPTY_BOXES and item[i + 1] not in EMPTY_BOXES:
-                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i + 1]]:
-                        FULL_BOXES[item[i + 1]] *= 2
-                        FULL_BOXES.pop(item[i])
-                        EMPTY_BOXES.append(item[i])
+            for i in range(3, 0, -1):
+                if item[i] not in EMPTY_BOXES and item[i - 1] not in EMPTY_BOXES:
+                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i - 1]]:
+                        FULL_BOXES[item[i]] *= 2
+                        FULL_BOXES.pop(item[i - 1])
+                        EMPTY_BOXES.append(item[i - 1])
             DOWNLogic(item)
         CHOSEN = False
     elif event.key == K_RIGHT:
