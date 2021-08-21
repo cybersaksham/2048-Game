@@ -35,6 +35,7 @@ def resetGame():
 
 # Play Sound
 def playSound(sound):
+    pygame.mixer.stop()
     pygame.mixer.music.load(f"Gallery/Sounds/{sound}.wav")
     pygame.mixer.music.play()
 
