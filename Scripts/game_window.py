@@ -170,12 +170,12 @@ def eventHandler(event):
 
 # PREVIEW WINDOW
 def gameWindow():
+    SCREEN.blit(GAME_WINDOW, (0, 0))
+    for box in FULL_BOXES:
+        drawBox(box, FULL_BOXES[box])
     if GAME_WON:
         showWon()
     elif GAME_LOST:
         showLose()
     else:
-        SCREEN.blit(GAME_WINDOW, (0, 0))
         chooseRandomBox()
-        for box in FULL_BOXES:
-            drawBox(box, FULL_BOXES[box])
