@@ -23,3 +23,11 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 python3 main.py
 ```
+
+# Uninstalling
+
+```cmd
+deactivate
+cd ..
+rm -rf AI-self-driving-car
+```
