@@ -7,7 +7,7 @@ def showStatus(color, t1):
     text = FONT.render(t1, 1, pygame.Color("white"))
     text_rect = text.get_rect(center=(SCREENWIDTH / 2, 275))
     SCREEN.blit(text, text_rect)
-    text2 = FONT.render("Click anywhere to restart.", 1, pygame.Color("white"))
+    text2 = FONT.render("Press spacebar to restart.", 1, pygame.Color("white"))
     text_rect2 = text2.get_rect(center=(SCREENWIDTH / 2, 315))
     SCREEN.blit(text2, text_rect2)
 

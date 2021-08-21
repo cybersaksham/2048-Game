@@ -23,6 +23,16 @@ def drawBox(pos, no):
     SCREEN.blit(text, text_rect)
 
 
+# Reset Game
+def resetGame():
+    global CHOSEN, FULL_BOXES, EMPTY_BOXES, GAME_WON, GAME_LOST
+    GAME_WON = False
+    GAME_LOST = False
+    CHOSEN = False
+    FULL_BOXES = {}
+    EMPTY_BOXES = [pt for item in BOXES for pt in item]
+
+
 # Choose Random Box
 def chooseRandomBox():
     global CHOSEN
@@ -139,6 +149,9 @@ def eventHandler(event):
         if len(EMPTY_BOXES) == 0:
             GAME_LOST = True
             CHOSEN = True
+    else:
+        if event.key == K_SPACE:
+            resetGame()
 
 
 # PREVIEW WINDOW
