@@ -18,7 +18,7 @@ GAME_LOST = False
 
 # Showing Box
 def drawBox(pos, no):
-    text = FONT.render(str(no), 1, pygame.Color("black"))
+    text = FONT.render(str(no), 1, pygame.Color(WHITE))
     text_rect = text.get_rect(center=((pos[0] * 2 + BOX_WIDTH) / 2, (pos[1] * 2 + BOX_WIDTH) / 2))
     SCREEN.blit(text, text_rect)
 
