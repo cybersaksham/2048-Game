@@ -154,9 +154,11 @@ def eventHandler(event):
             CHOSEN = False
         for item in FULL_BOXES:
             if FULL_BOXES[item] == 2048:
+                playSound("gamewon")
                 GAME_WON = True
                 CHOSEN = True
         if len(EMPTY_BOXES) == 0:
+            playSound("gameover")
             GAME_LOST = True
             CHOSEN = True
     else:
