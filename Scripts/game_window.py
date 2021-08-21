@@ -64,6 +64,15 @@ def DOWNLogic(item):
             EMPTY_BOXES.remove(item[len(item) - 1 - i])
 
 
+# SUM Logic
+def SUMLogic(item, i, j):
+    if item[i] not in EMPTY_BOXES and item[j] not in EMPTY_BOXES:
+        if FULL_BOXES[item[i]] == FULL_BOXES[item[j]]:
+            FULL_BOXES[item[i]] *= 2
+            FULL_BOXES.pop(item[j])
+            EMPTY_BOXES.append(item[j])
+
+
 # Event Handler
 def eventHandler(event):
     global CHOSEN
@@ -72,11 +81,7 @@ def eventHandler(event):
         for item in rev_list:
             UPLogic(item)
             for i in range(3):
-                if item[i] not in EMPTY_BOXES and item[i + 1] not in EMPTY_BOXES:
-                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i + 1]]:
-                        FULL_BOXES[item[i]] *= 2
-                        FULL_BOXES.pop(item[i + 1])
-                        EMPTY_BOXES.append(item[i + 1])
+                SUMLogic(item, i, i + 1)
             UPLogic(item)
         CHOSEN = False
     elif event.key == K_DOWN:
@@ -84,11 +89,7 @@ def eventHandler(event):
         for item in rev_list:
             DOWNLogic(item)
             for i in range(3, 0, -1):
-                if item[i] not in EMPTY_BOXES and item[i - 1] not in EMPTY_BOXES:
-                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i - 1]]:
-                        FULL_BOXES[item[i]] *= 2
-                        FULL_BOXES.pop(item[i - 1])
-                        EMPTY_BOXES.append(item[i - 1])
+                SUMLogic(item, i, i - 1)
             DOWNLogic(item)
         CHOSEN = False
     elif event.key == K_RIGHT:
