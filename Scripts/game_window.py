@@ -57,7 +57,16 @@ def eventHandler(event):
                     EMPTY_BOXES.remove(item[i])
         CHOSEN = False
     elif event.key == K_DOWN:
-        print("DOWN")
+        rev_list = revList()
+        for item in rev_list:
+            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
+            for i, j in enumerate(fill_pt):
+                FULL_BOXES[item[len(item) - 1 - i]] = FULL_BOXES[j]
+                if item[len(item) - 1 - i] != j:
+                    FULL_BOXES.pop(j)
+                    EMPTY_BOXES.append(j)
+                    EMPTY_BOXES.remove(item[len(item) - 1 - i])
+        CHOSEN = False
     elif event.key == K_RIGHT:
         for item in BOXES:
             fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
