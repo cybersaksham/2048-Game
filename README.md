@@ -10,8 +10,9 @@ These packages are needed to be installed in order to run python files.
 pip3 install pygame
 ```
 
-# Instructions
+# Installing
 
+## Linux
 Install python3 on your device.
 Then run these commands.
 
@@ -25,7 +26,7 @@ python3 main.py
 ```
 
 # Uninstalling
-
+## Linux
 ```cmd
 deactivate
 cd ..
