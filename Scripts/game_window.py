@@ -1,5 +1,6 @@
 from Scripts.screen import *
 from Scripts.font import FONT
+from Scripts.game_won_window import showWon
 
 GAME_WINDOW = pygame.transform.scale(pygame.image.load("Gallery/Images/grid.png"), (SCREENWIDTH, SCREENHEIGHT))
 
@@ -100,48 +101,52 @@ def SUMLogic(item, i, j):
 # Event Handler
 def eventHandler(event):
     global CHOSEN, GAME_WON, GAME_LOST
-    if event.key == K_UP:
-        rev_list = revList()
-        for item in rev_list:
-            UPLogic(item)
-            for i in range(3):
-                SUMLogic(item, i, i + 1)
-            UPLogic(item)
-        CHOSEN = False
-    elif event.key == K_DOWN:
-        rev_list = revList()
-        for item in rev_list:
-            DOWNLogic(item)
-            for i in range(3, 0, -1):
-                SUMLogic(item, i, i - 1)
-            DOWNLogic(item)
-        CHOSEN = False
-    elif event.key == K_RIGHT:
-        for item in BOXES:
-            RIGHTLogic(item)
-            for i in range(3, 0, -1):
-                SUMLogic(item, i, i - 1)
-            RIGHTLogic(item)
-        CHOSEN = False
-    elif event.key == K_LEFT:
-        for item in BOXES:
-            LEFTLogic(item)
-            for i in range(3):
-                SUMLogic(item, i, i + 1)
-            LEFTLogic(item)
-        CHOSEN = False
-    for item in FULL_BOXES:
-        if FULL_BOXES[item] == 2048:
-            GAME_WON = True
+    if not GAME_WON and not GAME_LOST:
+        if event.key == K_UP:
+            rev_list = revList()
+            for item in rev_list:
+                UPLogic(item)
+                for i in range(3):
+                    SUMLogic(item, i, i + 1)
+                UPLogic(item)
+            CHOSEN = False
+        elif event.key == K_DOWN:
+            rev_list = revList()
+            for item in rev_list:
+                DOWNLogic(item)
+                for i in range(3, 0, -1):
+                    SUMLogic(item, i, i - 1)
+                DOWNLogic(item)
+            CHOSEN = False
+        elif event.key == K_RIGHT:
+            for item in BOXES:
+                RIGHTLogic(item)
+                for i in range(3, 0, -1):
+                    SUMLogic(item, i, i - 1)
+                RIGHTLogic(item)
+            CHOSEN = False
+        elif event.key == K_LEFT:
+            for item in BOXES:
+                LEFTLogic(item)
+                for i in range(3):
+                    SUMLogic(item, i, i + 1)
+                LEFTLogic(item)
+            CHOSEN = False
+        for item in FULL_BOXES:
+            if FULL_BOXES[item] == 4:
+                GAME_WON = True
+                CHOSEN = True
+        if len(EMPTY_BOXES) == 0:
+            GAME_LOST = True
             CHOSEN = True
-    if len(EMPTY_BOXES) == 0:
-        GAME_LOST = True
-        CHOSEN = True
 
 
 # PREVIEW WINDOW
 def gameWindow():
-    SCREEN.blit(GAME_WINDOW, (0, 0))
-    chooseRandomBox()
-    for box in FULL_BOXES:
-        drawBox(box, FULL_BOXES[box])
+    if GAME_WON:
+        showWon()
+    else:
+        SCREEN.blit(GAME_WINDOW, (0, 0))
+        chooseRandomBox()
+        for box in FULL_BOXES:
+            drawBox(box, FULL_BOXES[box])
