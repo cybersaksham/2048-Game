@@ -10,11 +10,18 @@ These packages are needed to be installed in order to run python files.
 pip3 install pygame
 ```
 
-# Installing
+# Download Code
 
 ## Linux
-Install python3 on your device.
-Then run these commands.
+### Installing
+<li>Install python3 on your device. Then run</li>
+
+```cmd
+sudo apt-get install -y python3-pip
+sudo apt-get install -y python3-venv
+```
+
+<li>Now run these commands to download & run code</li>
 
 ```cmd
 git clone https://github.com/cybersaksham/2048-Game
@@ -25,8 +32,7 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
-# Uninstalling
-## Linux
+### Uninstalling
 ```cmd
 deactivate
 cd ..
