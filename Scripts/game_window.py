@@ -53,6 +53,17 @@ def UPLogic(item):
             EMPTY_BOXES.remove(item[i])
 
 
+# DOWN Logic
+def DOWNLogic(item):
+    fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
+    for i, j in enumerate(fill_pt):
+        FULL_BOXES[item[len(item) - 1 - i]] = FULL_BOXES[j]
+        if item[len(item) - 1 - i] != j:
+            FULL_BOXES.pop(j)
+            EMPTY_BOXES.append(j)
+            EMPTY_BOXES.remove(item[len(item) - 1 - i])
+
+
 # Event Handler
 def eventHandler(event):
     global CHOSEN
@@ -71,13 +82,14 @@ def eventHandler(event):
     elif event.key == K_DOWN:
         rev_list = revList()
         for item in rev_list:
-            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
-            for i, j in enumerate(fill_pt):
-                FULL_BOXES[item[len(item) - 1 - i]] = FULL_BOXES[j]
-                if item[len(item) - 1 - i] != j:
-                    FULL_BOXES.pop(j)
-                    EMPTY_BOXES.append(j)
-                    EMPTY_BOXES.remove(item[len(item) - 1 - i])
+            DOWNLogic(item)
+            for i in range(3):
+                if item[i] not in EMPTY_BOXES and item[i + 1] not in EMPTY_BOXES:
+                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i + 1]]:
+                        FULL_BOXES[item[i + 1]] *= 2
+                        FULL_BOXES.pop(item[i])
+                        EMPTY_BOXES.append(item[i])
+            DOWNLogic(item)
         CHOSEN = False
     elif event.key == K_RIGHT:
         for item in BOXES:
