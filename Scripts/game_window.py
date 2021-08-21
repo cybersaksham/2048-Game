@@ -1,6 +1,6 @@
 from Scripts.screen import *
 from Scripts.font import FONT
-from Scripts.game_won_window import showWon
+from Scripts.status_window import showWon, showLose
 
 GAME_WINDOW = pygame.transform.scale(pygame.image.load("Gallery/Images/grid.png"), (SCREENWIDTH, SCREENHEIGHT))
 
@@ -133,7 +133,7 @@ def eventHandler(event):
                 LEFTLogic(item)
             CHOSEN = False
         for item in FULL_BOXES:
-            if FULL_BOXES[item] == 4:
+            if FULL_BOXES[item] == 2048:
                 GAME_WON = True
                 CHOSEN = True
         if len(EMPTY_BOXES) == 0:
@@ -145,6 +145,8 @@ def eventHandler(event):
 def gameWindow():
     if GAME_WON:
         showWon()
+    elif GAME_LOST:
+        showLose()
     else:
         SCREEN.blit(GAME_WINDOW, (0, 0))
         chooseRandomBox()
