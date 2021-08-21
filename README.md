@@ -29,5 +29,5 @@ python3 main.py
 ```cmd
 deactivate
 cd ..
-rm -rf AI-self-driving-car
+rm -rf 2048-Game
 ```
