@@ -31,11 +31,31 @@ def chooseRandomBox():
         EMPTY_BOXES.remove(box__)
 
 
+# Reverse List
+def revList():
+    rev_list = []
+    for i in range(4):
+        item = []
+        for j in range(4):
+            item.append(BOXES[j][i])
+        rev_list.append(item)
+    return rev_list
+
+
 # Event Handler
 def eventHandler(event):
     global CHOSEN
     if event.key == K_UP:
-        print("UP")
+        rev_list = revList()
+        for item in rev_list:
+            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))
+            for i, j in enumerate(fill_pt):
+                FULL_BOXES[item[i]] = FULL_BOXES[j]
+                if item[i] != j:
+                    FULL_BOXES.pop(j)
+                    EMPTY_BOXES.append(j)
+                    EMPTY_BOXES.remove(item[i])
+        CHOSEN = False
     elif event.key == K_DOWN:
         print("DOWN")
     elif event.key == K_RIGHT:
