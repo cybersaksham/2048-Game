@@ -33,6 +33,12 @@ def resetGame():
     EMPTY_BOXES = [pt for item in BOXES for pt in item]
 
 
+# Play Sound
+def playSound(sound):
+    pygame.mixer.music.load(f"Gallery/Sounds/{sound}.wav")
+    pygame.mixer.music.play()
+
+
 # Choose Random Box
 def chooseRandomBox():
     global CHOSEN
@@ -113,6 +119,7 @@ def eventHandler(event):
     global CHOSEN, GAME_WON, GAME_LOST
     if not GAME_WON and not GAME_LOST:
         if event.key == K_UP:
+            playSound("slide")
             rev_list = revList()
             for item in rev_list:
                 UPLogic(item)
@@ -121,6 +128,7 @@ def eventHandler(event):
                 UPLogic(item)
             CHOSEN = False
         elif event.key == K_DOWN:
+            playSound("slide")
             rev_list = revList()
             for item in rev_list:
                 DOWNLogic(item)
@@ -129,6 +137,7 @@ def eventHandler(event):
                 DOWNLogic(item)
             CHOSEN = False
         elif event.key == K_RIGHT:
+            playSound("slide")
             for item in BOXES:
                 RIGHTLogic(item)
                 for i in range(3, 0, -1):
@@ -136,6 +145,7 @@ def eventHandler(event):
                 RIGHTLogic(item)
             CHOSEN = False
         elif event.key == K_LEFT:
+            playSound("slide")
             for item in BOXES:
                 LEFTLogic(item)
                 for i in range(3):
