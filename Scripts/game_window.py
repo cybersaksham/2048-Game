@@ -42,19 +42,31 @@ def revList():
     return rev_list
 
 
+# UP Logic
+def UPLogic(item):
+    fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))
+    for i, j in enumerate(fill_pt):
+        FULL_BOXES[item[i]] = FULL_BOXES[j]
+        if item[i] != j:
+            FULL_BOXES.pop(j)
+            EMPTY_BOXES.append(j)
+            EMPTY_BOXES.remove(item[i])
+
+
 # Event Handler
 def eventHandler(event):
     global CHOSEN
     if event.key == K_UP:
         rev_list = revList()
         for item in rev_list:
-            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))
-            for i, j in enumerate(fill_pt):
-                FULL_BOXES[item[i]] = FULL_BOXES[j]
-                if item[i] != j:
-                    FULL_BOXES.pop(j)
-                    EMPTY_BOXES.append(j)
-                    EMPTY_BOXES.remove(item[i])
+            UPLogic(item)
+            for i in range(3):
+                if item[i] not in EMPTY_BOXES and item[i + 1] not in EMPTY_BOXES:
+                    if FULL_BOXES[item[i]] == FULL_BOXES[item[i + 1]]:
+                        FULL_BOXES[item[i]] *= 2
+                        FULL_BOXES.pop(item[i + 1])
+                        EMPTY_BOXES.append(item[i + 1])
+            UPLogic(item)
         CHOSEN = False
     elif event.key == K_DOWN:
         rev_list = revList()
