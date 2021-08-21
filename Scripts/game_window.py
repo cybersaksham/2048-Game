@@ -64,6 +64,17 @@ def DOWNLogic(item):
             EMPTY_BOXES.remove(item[len(item) - 1 - i])
 
 
+# RIGHT Logic
+def RIGHTLogic(item):
+    fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
+    for i, j in enumerate(fill_pt):
+        FULL_BOXES[item[len(item) - 1 - i]] = FULL_BOXES[j]
+        if item[len(item) - 1 - i] != j:
+            FULL_BOXES.pop(j)
+            EMPTY_BOXES.append(j)
+            EMPTY_BOXES.remove(item[len(item) - 1 - i])
+
+
 # SUM Logic
 def SUMLogic(item, i, j):
     if item[i] not in EMPTY_BOXES and item[j] not in EMPTY_BOXES:
@@ -94,13 +105,10 @@ def eventHandler(event):
         CHOSEN = False
     elif event.key == K_RIGHT:
         for item in BOXES:
-            fill_pt = list(filter(lambda box__: box__ not in EMPTY_BOXES, item))[::-1]
-            for i, j in enumerate(fill_pt):
-                FULL_BOXES[item[len(item) - 1 - i]] = FULL_BOXES[j]
-                if item[len(item) - 1 - i] != j:
-                    FULL_BOXES.pop(j)
-                    EMPTY_BOXES.append(j)
-                    EMPTY_BOXES.remove(item[len(item) - 1 - i])
+            RIGHTLogic(item)
+            for i in range(3, 0, -1):
+                SUMLogic(item, i, i - 1)
+            RIGHTLogic(item)
         CHOSEN = False
     elif event.key == K_LEFT:
         for item in BOXES:
