@@ -38,3 +38,26 @@ deactivate
 cd ..
 rm -rf 2048-Game
 ```
+
+## Windows
+### Installing
+<li>Install python3 & pip3 on your device.</li>
+
+<li>Now run these commands to download & run code</li>
+
+```cmd
+git clone https://github.com/cybersaksham/2048-Game
+cd 2048-Game
+python3 -m venv venv
+.\venv\Scripts\activate
+pip3 install -r requirements.txt
+python3 main.py
+```
+
+### Uninstalling
+
+```cmd
+deactivate
+cd ..
+rmdir /S 2048-Game
+```
