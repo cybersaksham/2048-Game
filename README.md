@@ -51,7 +51,7 @@ cd 2048-Game
 python3 -m venv venv
 .\venv\Scripts\activate
 pip3 install -r requirements.txt
-python3 main.py
+python main.py
 ```
 
 ### Uninstalling
